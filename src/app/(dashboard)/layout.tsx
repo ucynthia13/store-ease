@@ -1,13 +1,11 @@
-import AppNavbar from "@/components/app-components.tsx/app-navbar";
-import React from "react";
+import React from 'react'
 
-const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
+const DashboardLayout = () => {
   return (
-    <>
-      <AppNavbar />
-      {children}  
-    </>
-  );
-};
+    <div>
+      
+    </div>
+  )
+}
 
-export default DashboardLayout;
+export default DashboardLayout
