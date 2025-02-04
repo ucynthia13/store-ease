@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -15,6 +15,8 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
+import { LoaderCircle } from "lucide-react";
+import OtpModal from "./OtpModal";
 
 type FormType = "login" | "signup";
 
@@ -26,6 +28,8 @@ const formSchema = z.object({
 });
 
 const AuthForm = ({ type }: { type: FormType }) => {
+    const [isLoading, setIsLoading] = useState(false)
+    const [errorMessage, seterrorMessage] = useState("")
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -43,7 +47,7 @@ const AuthForm = ({ type }: { type: FormType }) => {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 w-1/2">
-        <h1 className=" text-center font-extrabold sm:text-sm md:text-2xl lg:text-4xl py-4 lg:py-8">
+        <h1 className=" font-extrabold sm:text-sm md:text-2xl lg:text-4xl py-4 lg:py-8">
           {type === "signup" ? "Create Account" : "Welcome Back!"}
         </h1>
         {type === "signup" && (
@@ -110,8 +114,11 @@ const AuthForm = ({ type }: { type: FormType }) => {
             </FormItem>
           )}
         />
-        <Button type="submit" className="w-full shadow-md">
+        <Button type="submit" className="w-full shadow-md h-12">
           Submit
+          {isLoading && (
+            <LoaderCircle className="size-6 animate-spin text-card" />
+          )}
         </Button>
         {type === "login" && (
           <div className="flex items-center justify-center text-sm gap-2 pt-4">
@@ -129,6 +136,7 @@ const AuthForm = ({ type }: { type: FormType }) => {
             </Link>
           </div>
         )}
+        <OtpModal />
       </form>
     </Form>
   );
