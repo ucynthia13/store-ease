@@ -40,32 +40,28 @@ const OtpModal = () => {
 
   return (
     <AlertDialog open={isOPen}>
-      <AlertDialogTrigger>Open</AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>
-          <AlertDialogTitle className="font-bold">
+          <AlertDialogTitle className="font-bold flex justify-between items-center">
             Enter Your OTP
-          </AlertDialogTitle>
-          <Image
-            src="/assets/icons/close.svg"
+            <Image
+            src="/assets/images/Close.png"
             alt="cancel"
             className="text-primary"
-            width={16}
-            height={16}
+            width={32}
+            height={32}
             onClick={() => setIsOpen(false)}
           />
+          </AlertDialogTitle>
         </AlertDialogHeader>
         <InputOTP maxLength={6}>
-          <InputOTPGroup>
-            <InputOTPSlot index={0} />
-            <InputOTPSlot index={1} />
-            <InputOTPSlot index={2} />
-          </InputOTPGroup>
-          <InputOTPSeparator />
-          <InputOTPGroup>
-            <InputOTPSlot index={3} />
-            <InputOTPSlot index={4} />
-            <InputOTPSlot index={5} />
+          <InputOTPGroup className="gap-8 text-center">
+            <InputOTPSlot index={0} className="text-primary text-lg rounded-lg p-6"/>
+            <InputOTPSlot index={1} className="text-primary text-lg rounded-lg p-6"/>
+            <InputOTPSlot index={2} className="text-primary text-lg rounded-lg p-6"/>
+            <InputOTPSlot index={3} className="text-primary text-lg rounded-lg p-6"/>
+            <InputOTPSlot index={4} className="text-primary text-lg rounded-lg p-6"/>
+            <InputOTPSlot index={5} className="text-primary text-lg rounded-lg p-6"/>
           </InputOTPGroup>
         </InputOTP>
         <AlertDialogFooter className="flex flex-col gap-4">
