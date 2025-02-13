@@ -5,7 +5,7 @@ import Image from "next/image";
 
 const AppHeader = () => {
   return (
-    <header className="flex justify-between p-4 lg:p-8">
+    <header className="sticky flex justify-between pt-8 px-8">
       <SearchBar />
       <div className="flex gap-4">
         <FileUploader />
