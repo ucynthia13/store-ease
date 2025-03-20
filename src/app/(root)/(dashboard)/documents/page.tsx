@@ -7,7 +7,7 @@ const Documents = () => {
         <h1 className="text-md md:text-xl lg:text-3xl font-extrabold" >Documents</h1>
         <div className="flex justify-between my-4">
             <p className="">
-            Total <span className="font-bold">12GB</span>
+            Total: <span className="font-bold">12GB</span>
             </p>
             Sort
         </div>

@@ -5,7 +5,7 @@ const layout = ({ children }: { children: React.ReactNode }) => {
   return (
     <div className="flex min-h-screen">
       <section className="bg-primary p-10 items-center justify-center hidden lg:flex xl:w-2/5 w-1/2">
-        <div className="flex flex-col max-h-[800px] max-w-[430px] items-cente space-y-12 ">
+        <div className="flex flex-col max-h-[800px] max-w-[430px] items-center space-y-12 ">
           <Image
             src="/assets/images/storelogo.png"
             alt="login"
@@ -34,7 +34,7 @@ const layout = ({ children }: { children: React.ReactNode }) => {
         </div>
       </section>
       <section className="bg-card flex flex-1 flex-col items-center lg:justify-center p-4 py-10 lg:py-0 lg:p-10">
-        <div className="mb-6 lg:hidden">
+        <div className="mb-6 block lg:hidden">
           <Image
             src="/assets/images/storelogo.png"
             alt="login"

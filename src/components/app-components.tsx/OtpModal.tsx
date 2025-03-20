@@ -2,23 +2,19 @@ import React, { useState } from "react";
 import {
   AlertDialog,
   AlertDialogAction,
-  AlertDialogCancel,
   AlertDialogContent,
-  AlertDialogDescription,
   AlertDialogFooter,
   AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger,
+  AlertDialogTitle
 } from "@/components/ui/alert-dialog";
 
 import {
   InputOTP,
   InputOTPGroup,
-  InputOTPSeparator,
   InputOTPSlot,
 } from "@/components/ui/input-otp";
 import Link from "next/link";
-import Image from "next/image";
+import { X } from "lucide-react";
 
 const OtpModal = () => {
   const [isOPen, setIsOpen] = useState(true);
@@ -44,14 +40,7 @@ const OtpModal = () => {
         <AlertDialogHeader>
           <AlertDialogTitle className="font-bold flex justify-between items-center">
             Enter Your OTP
-            <Image
-            src="/assets/images/Close.png"
-            alt="cancel"
-            className="text-primary"
-            width={32}
-            height={32}
-            onClick={() => setIsOpen(false)}
-          />
+            <X className="text-card w-6 h-6 bg-input rounded-full p-1" onClick={() => setIsOpen(false)} />
           </AlertDialogTitle>
         </AlertDialogHeader>
         <InputOTP maxLength={6}>
