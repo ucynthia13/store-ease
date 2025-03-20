@@ -1,3 +1,5 @@
+"use server"
+
 import { ID, Query } from "node-appwrite"
 import { createAdminClient } from ".."
 import { appwriteConfig } from "../appwrite/config"
@@ -33,7 +35,6 @@ const sendEmailOTP = async({email}: {email:string}) => {
 export const createAccount = async({
     fullName,
     email,
-
 }: {
     fullName: string, 
     email: string,
