@@ -59,5 +59,5 @@ export const createAccount = async({
         )
     }
 
-    return parseStringify(accountId);
+    return parseStringify({accountId});
 }
