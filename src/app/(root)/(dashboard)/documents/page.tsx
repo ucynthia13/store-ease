@@ -1,4 +1,5 @@
 import FileCard from '@/components/app-components.tsx/FileCard'
+import Filter from '@/components/app-components.tsx/Filter'
 import React from 'react'
 
 const Documents = () => {
@@ -9,7 +10,7 @@ const Documents = () => {
             <p className="">
             Total: <span className="font-bold">12GB</span>
             </p>
-            Sort
+            <Filter />
         </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         <FileCard />
