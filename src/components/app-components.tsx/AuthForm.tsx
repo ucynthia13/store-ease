@@ -30,7 +30,7 @@ const formSchema = z.object({
 
 const AuthForm = ({ type }: { type: FormType }) => {
     const [isLoading, setIsLoading] = useState(false)
-    const [errorMessage, seterrorMessage] = useState("")
+    const [errorMessage, setErrorMessage] = useState("")
     const [account, setAccount] = useState(0)
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -44,12 +44,12 @@ const AuthForm = ({ type }: { type: FormType }) => {
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     setIsLoading(true)
-    seterrorMessage("")
+    setErrorMessage("")
     try {
       const user = await createAccount({fullName: values.fullname, email: values.email} )
       setAccount(user.accountId)
     } catch  {
-      seterrorMessage("Failed to sign in")
+      setErrorMessage("Failed to sign in")
     } finally{
       setIsLoading(false)
     }

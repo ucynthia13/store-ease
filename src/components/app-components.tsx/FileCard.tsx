@@ -8,7 +8,7 @@ const FileCard = () => {
     <Link href="/login" className="rounded-2xl shadow-sm p-4 bg-card h-fit">
         <div className="flex justify-between mb-4">
             <div className="">
-            <Image src="/assets/images/avatar.png" alt="File Logo" width={90} height={90}/> 
+            <Image src="/assets/images/avatar.png" alt="File Logo" width={80} height={80}/> 
             </div>
             <div className="flex flex-col items-end justify-between">
                 <Menu />
