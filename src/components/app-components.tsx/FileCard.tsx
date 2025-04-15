@@ -11,14 +11,14 @@ const FileCard = () => {
             <Image src="/assets/images/avatar.png" alt="File Logo" width={70} height={70}/> 
             </div>
             <div className="flex flex-col items-end justify-between">
-                <Menu />
-                <p>2 GB</p>
+                <Menu className="w-5 h-5   text-gray-600"/>
+                <p className="text-sm">2 GB</p>
             </div>
         </div>
         <div className="flex flex-col gap-1">
-            <p className="font-semibold text-lg">File name.png</p>
-            <p className="text-light-400">Oct 18th, 2024</p>
-            <p className="opacity-50">By Cynthia Umwali</p>
+            <p className="font-semibold">File name.png</p>
+            <p className="text-light-400 text-sm">Oct 18th, 2024</p>
+            <p className="opacity-50 text-sm">By Cynthia Umwali</p>
         </div>
     </Link>
   )
