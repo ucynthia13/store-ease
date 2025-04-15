@@ -18,6 +18,7 @@ import Link from "next/link";
 import { LoaderCircle } from "lucide-react";
 import OtpModal from "./OtpModal";
 import { createAccount } from "@/lib/actions/user.actions";
+import { PasswordInput } from "../ui/password-input";
 
 type FormType = "login" | "signup";
 
@@ -48,7 +49,7 @@ const AuthForm = ({ type }: { type: FormType }) => {
     try {
       const user = await createAccount({fullName: values.fullname, email: values.email} )
       setAccount(user.accountId)
-    } catch  {
+      } catch  {
       setErrorMessage("Failed to sign in")
     } finally{
       setIsLoading(false)
@@ -115,11 +116,7 @@ const AuthForm = ({ type }: { type: FormType }) => {
           render={({ field }) => (
             <FormItem>
               <FormControl>
-                <Input
-                  placeholder="Password"
-                  {...field}
-                  className="shad-input"
-                />
+                <PasswordInput placeholder="Password" {...field} className="shad-input" />
               </FormControl>
               <FormMessage />
             </FormItem>
