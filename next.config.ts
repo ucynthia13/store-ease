@@ -6,7 +6,15 @@ const nextConfig: NextConfig = {
   }, 
   typescript: {
     ignoreBuildErrors: true
-  }
+  }, 
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'img.icons8.com',
+      },
+    ],
+  },
 };
 
 export default nextConfig;

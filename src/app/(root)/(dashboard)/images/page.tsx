@@ -1,7 +1,7 @@
-import FileCard from '@/components/app-components.tsx/FileCard'
-import Filter from '@/components/app-components.tsx/Filter'
+import Filter from '@/components/app-components/Filter'
 import React from 'react'
-
+import fileData from '@/constants'
+import FileCard from '@/components/app-components/FileCard'
 const Images = () => {
   return (
     <div className="p-4 lg:p-8 bg-slate-50 h-full m-4 lg:m-8 rounded-2xl">
@@ -13,15 +13,16 @@ const Images = () => {
             <Filter />
         </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        <FileCard />
-        <FileCard />
-        <FileCard />
-        <FileCard />
-        <FileCard />
-        <FileCard />
-        <FileCard />
-        <FileCard />
-        <FileCard />
+      {fileData.map((file, index) => (
+                      <FileCard
+                        key={index}
+                        image={file.image}
+                        name={file.name}
+                        size={file.size}
+                        date={file.date}
+                        author={file.author}
+                      />
+                    ))}
       </div>
     </div>
   )

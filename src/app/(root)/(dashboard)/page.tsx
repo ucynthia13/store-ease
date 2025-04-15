@@ -1,6 +1,6 @@
 import React from 'react'
-import Files from '@/components/app-components.tsx/Files'
-import RecentUplods from '@/components/app-components.tsx/RecentUploads'
+import Files from '@/components/app-components/Files'
+import RecentUplods from '@/components/app-components/RecentUploads'
 
 const Dashboard = () => {
   return (

@@ -1,6 +1,6 @@
 import { Providers } from '@/components/providers/providers'
 import { SidebarProvider } from '@/components/ui/sidebar'
-import AppSidebar from '@/components/app-components.tsx/Sidebar'
+import AppSidebar from '@/components/app-components/Sidebar'
 import React from 'react'
 
 const DashboardLayout = ({children} : {children: React.ReactNode}) => {
