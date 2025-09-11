@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
+import { useRouter } from "next/router";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -19,6 +20,7 @@ import { LoaderCircle } from "lucide-react";
 import OtpModal from "./OtpModal";
 import { createAccount } from "@/lib/actions/user.actions";
 import { PasswordInput } from "../ui/password-input";
+import { toast } from "sonner";
 
 type FormType = "login" | "signup";
 
@@ -31,8 +33,9 @@ const formSchema = z.object({
 
 const AuthForm = ({ type }: { type: FormType }) => {
     const [isLoading, setIsLoading] = useState(false)
-    const [errorMessage, setErrorMessage] = useState("")
-    const [account, setAccount] = useState(0)
+    const [, setErrorMessage] = useState("")
+    const [, setAccount] = useState(0)
+    const router = useRouter()
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -49,6 +52,8 @@ const AuthForm = ({ type }: { type: FormType }) => {
     try {
       const user = await createAccount({fullName: values.fullname, email: values.email} )
       setAccount(user.accountId)
+      toast.success("Login Successful!")
+      router.push('/' )
       } catch  {
       setErrorMessage("Failed to sign in")
     } finally{

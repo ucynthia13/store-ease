@@ -4,6 +4,7 @@ import { ID, Query } from "node-appwrite"
 import { createAdminClient } from ".."
 import { appwriteConfig } from "../appwrite/config"
 import { parseStringify } from "../utils"
+import { toast } from "sonner"
 
 const getUserByEmail = async(email: string) => {
     const { databases } = await createAdminClient()
@@ -25,9 +26,11 @@ const handleError = (error: unknown, message: string) => {
 const sendEmailOTP = async({email}: {email:string}) => {
     const { account } = await createAdminClient()
     try {
-        const session = await account.createEmailToken(ID.unique(), email);
+        const session = await account.createEmailToken(ID.unique(), email)
+        toast.success("OTP sent to your email!")
         return session.userId;
     } catch (error) {
+        toast.error("Failed to send OTP!")
         handleError(error, "failed to send OTP")
     }
 }

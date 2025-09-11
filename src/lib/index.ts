@@ -3,7 +3,8 @@ import { Account, Client, Databases, Storage, Avatars } from "node-appwrite"
 import { appwriteConfig } from "./appwrite/config";
 import { cookies } from "next/headers";
 
-export const createSession = async () => {
+//client instance with client-level permissions
+export const createSessionClient = async () => {
     const client = new Client()
     .setEndpoint(appwriteConfig.endpointUrl)
     .setProject(appwriteConfig.projectId)
@@ -15,28 +16,24 @@ export const createSession = async () => {
     client.setSession(session.value)
 
     return{
+        //returning new account
         get account(){
             return new Account(client)
         },
-
+        //returning databases from Appwrite
         get databases(){
             return new Databases(client)
         }
     }
 }
 
+//client instance with admin-level permissions
 export const createAdminClient = async () => {
     const client = new Client()
     .setEndpoint(appwriteConfig.endpointUrl)
     .setProject(appwriteConfig.projectId)
     .setKey(appwriteConfig.secretId)
-
-    const session = (await cookies()).get('appwrite-session')
-    console.log(session)
-    if(!session || !session.value) throw new Error("No session")
-
-    client.setSession(session.value)
-
+    
     return {
         get account(){
             return new Account(client)
