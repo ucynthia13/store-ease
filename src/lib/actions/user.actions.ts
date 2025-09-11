@@ -23,14 +23,13 @@ const handleError = (error: unknown, message: string) => {
     throw error;
 }
 
-const sendEmailOTP = async({email}: {email:string}) => {
+const sendEmailOTP = async({userId, email}: {userId: string, email:string}) => {
     const { account } = await createAdminClient()
     try {
-        const session = await account.createEmailToken(ID.unique(), email)
+        const session = await account.createEmailToken(userId, email)
         toast.success("OTP sent to your email!")
         return session.userId;
     } catch (error) {
-        toast.error("Failed to send OTP!")
         handleError(error, "failed to send OTP")
     }
 }
@@ -43,25 +42,31 @@ export const createAccount = async({
     email: string,
 }) => {
     const existingUser = await getUserByEmail(email);
-    const accountId = await sendEmailOTP({email});
-
-    if(!accountId) throw new Error("Failed to send OTP!");
+    let accountId: string;
 
     if(!existingUser) {
         const { databases } = await createAdminClient();
+        const newAccountId = ID.unique();
 
         await databases.createDocument(
             appwriteConfig.databaseId,
             appwriteConfig.usersCollectionId,
-            ID.unique(),
+            newAccountId,
             {
                 fullName,
                 email,
                 avatar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSthLaDjda8fg603o2NNtK6XQGaB-gIY8OSzYG435gvgZCWgh4QJcgIk3g&s",
-                accountId
+                accountId: newAccountId
             }
         )
+        accountId = newAccountId;
+    } else {
+        accountId = existingUser.accountId;
     }
+
+    const otpResult = await sendEmailOTP({userId: accountId, email});
+
+    if(!otpResult) throw new Error("Failed to send OTP!");
 
     return parseStringify({accountId});
 }
