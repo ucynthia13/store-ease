@@ -23,7 +23,7 @@ const handleError = (error: unknown, message: string) => {
     throw error;
 }
 
-const sendEmailOTP = async({userId, email}: {userId: string, email:string}) => {
+export const sendEmailOTP = async({userId, email}: {userId: string, email:string}) => {
     const { account } = await createAdminClient()
     try {
         const session = await account.createEmailToken(userId, email)
@@ -31,6 +31,16 @@ const sendEmailOTP = async({userId, email}: {userId: string, email:string}) => {
         return session.userId;
     } catch (error) {
         handleError(error, "failed to send OTP")
+    }
+}
+
+export const verifyEmailOTP = async({accountId, otp}: {accountId: string, otp:string}) => {
+    try {
+        const { account } = await createAdminClient()
+        const session = await account.createSession(accountId, otp)
+        return session.userId;
+    } catch (error) {
+        handleError(error, "failed to verify OTP")
     }
 }
 

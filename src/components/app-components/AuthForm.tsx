@@ -4,8 +4,6 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { useRouter } from "next/navigation";
-
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -34,8 +32,8 @@ const formSchema = z.object({
 const AuthForm = ({ type }: { type: FormType }) => {
     const [isLoading, setIsLoading] = useState(false)
     const [, setErrorMessage] = useState("")
-    const [, setAccount] = useState(0)
-    const router = useRouter()
+    const [accountId, setAccountId] = useState("")
+    const [otpEmail, setOtpEmail] = useState("")
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -51,9 +49,10 @@ const AuthForm = ({ type }: { type: FormType }) => {
     setErrorMessage("")
     try {
       const user = await createAccount({fullName: values.fullname, email: values.email} )
-      setAccount(user.accountId)
+      setAccountId(user.accountId)
+      setOtpEmail(values.email)
+      form.reset(); // Reset form to trigger re-render and show OTP modal
       toast.success("Login Successful!")
-      router.push('/' )
       } catch  {
       setErrorMessage("Failed to sign in")
     } finally{
@@ -149,7 +148,7 @@ const AuthForm = ({ type }: { type: FormType }) => {
             </Link>
           </div>
         )}
-        <OtpModal />
+        {accountId && (<OtpModal accountId={accountId} email={otpEmail} />)}
       </form>
     </Form>
   );
