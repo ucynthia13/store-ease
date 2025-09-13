@@ -19,14 +19,13 @@ import OtpModal from "./OtpModal";
 import { createAccount } from "@/lib/actions/user.actions";
 import { PasswordInput } from "../ui/password-input";
 import { toast } from "sonner";
-
 type FormType = "login" | "signup";
 
 const formSchema = z.object({
-  fullname: z.string(),
-  email: z.string(),
-  username: z.string().min(2).max(50),
-  password: z.string().min(5).max(12),
+  fullname: z.string().min(2, { message: "Full name must be at least 2 characters long" }),
+  email: z.string().min(5, { message: "Email must be at least 5 characters long" }).email({ message: "Invalid email address" }),
+  username: z.string().min(2, { message: "Username must be at least 2 characters long" }).max(50),
+  password: z.string().min(5, { message: "Password must be at least 5 characters long" }).max(12, { message: "Password must be at most 12 characters long" }),
 });
 
 const AuthForm = ({ type }: { type: FormType }) => {
@@ -51,11 +50,10 @@ const AuthForm = ({ type }: { type: FormType }) => {
       const user = await createAccount({fullName: values.fullname, email: values.email} )
       setAccountId(user.accountId)
       setOtpEmail(values.email)
-      form.reset(); // Reset form to trigger re-render and show OTP modal
       toast.success("Login Successful!")
-      } catch  {
+    } catch {
       setErrorMessage("Failed to sign in")
-    } finally{
+    } finally {
       setIsLoading(false)
     }
   };
